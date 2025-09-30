@@ -1,0 +1,27 @@
+version: 2
+
+
+sources:
+  - name: staging
+    schema: STG   # your actual schema
+    tables:
+      - name: STG_FRIDGE
+        description: "Raw IoT fridge staging table"
+
+
+
+models:
+  - name: dim_fridge
+    description: "Dimension table for fridge IoT metadata"
+    columns:
+      - name: dim_fridge_sr_key
+        description: "Surrogate key for DIM_FRIDGE"
+        tests:
+          - unique
+          - not_null
+      - name: label
+        description: "Fridge IoT label (device identifier or category)"
+      - name: temp_condition
+        description: "Temperature condition (e.g., high, low, normal)"
+      - name: type
+        description: "Type or classification of the IoT fridge device"
