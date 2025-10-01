@@ -1,17 +1,3 @@
-version: 2
-
-
-sources:
-  - name: staging
-    schema: STG   # your actual schema
-    tables:
-      - name: STG_FRIDGE
-        description: "Raw IoT fridge staging table"
-      - name: STG_GARAGE_DOOR
-        description: "Raw IoT garage staging table"  
-
-
-
 models:
   - name: DIM_FRIDGE
     description: "Dimension table for fridge IoT metadata"
