@@ -1,0 +1,53 @@
+USE DATABASE IOT_DB;
+USE SCHEMA dbt_hravat;
+
+DROP TABLE DIM_FRIDGE;
+
+TRUNCATE  TABLE DIM_GARAGE_DOOR;
+
+
+EXPLAIN USING TEXT 
+SELECT * 
+FROM DIM_FRIDGE;
+
+SELECT * 
+FROM DIM_GARAGE_DOOR; 
+
+SELECT DISTINCT DATE_SR_KEY
+FROM FACT_FRIDGE
+WHERE DATE_SR_KEY <> -1;
+
+
+SELECT DATE,TRIM(TIME),COUNT(*)
+FROM STG.STG_FRIDGE
+GROUP BY DATE,TIME
+HAVING COUNT(*) > 1 ;
+
+SELECT * 
+FROM STG.STG_FRIDGE
+WHERE TRIM(TIME) = '12:37:08'
+AND DATE = '31-Mar-19';
+
+
+SELECT * 
+FROM DIM_DATE
+WHERE DATE_SR_KEY=20190331;
+
+TRUNCATE TABLE FACT_FRIDGE; 
+
+SELECT * 
+FROM FACT_FRIDGE;
+
+
+DESCRIBE TABLE STG.STG_FRIDGE;
+
+
+select 
+    column_name,
+    data_type,
+    character_maximum_length,
+    numeric_precision,
+    numeric_scale,
+    is_nullable
+from information_schema.columns
+where table_name = 'DIM_FRIDGE'
