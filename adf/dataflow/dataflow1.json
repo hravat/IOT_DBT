@@ -1,0 +1,60 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ParameterizedDataset",
+						"type": "DatasetReference"
+					},
+					"name": "CSV"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AzureSynapseAnalyticsTable1",
+						"type": "DatasetReference"
+					},
+					"name": "Synapse"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          date as string,",
+				"          time as string,",
+				"          fridge_temperature as string,",
+				"          temp_condition as string,",
+				"          label as string,",
+				"          type as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> CSV",
+				"CSV sink(allowSchemaDrift: false,",
+				"     validateSchema: false,",
+				"     input(",
+				"          date as date,",
+				"          time as timestamp,",
+				"          fridge_temperature as decimal(9,2),",
+				"          temp_condition as string,",
+				"          label as string,",
+				"          type as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: true,",
+				"     allowCopyCommand: true,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> Synapse"
+			]
+		}
+	}
+}

@@ -1,0 +1,9 @@
+{
+	"name": "hr-adf-iot",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "125a6515-a186-40ac-914d-5991d71c646c",
+		"tenantId": "56d4a3ff-d1b6-458d-856e-7eb75385d795"
+	}
+}
