@@ -8,7 +8,19 @@ sources:
       - name: STG_FRIDGE
         description: "Raw IoT fridge staging table"
       - name: STG_GARAGE_DOOR
-        description: "Raw IoT garage staging table"  
+        description: "Raw IoT garage staging table" 
+      - name: STG_GPS_TRACKER
+        description: "Raw IoT GPS tracker staging table"
+      - name: STG_MODBUS
+        description: "Raw IoT Modbus staging table"
+      - name: STG_MOTION_LIGHT
+        description: "Raw IoT motion light staging table"
+      - name: STG_THERMOSTAT
+        description: "Raw IoT thermostat staging table"
+      - name: STG_WEATHER
+        description: "Raw IoT weather sensor staging table"
+
+   
 
   - name: dwh
     schema: DWH   # your actual schema
