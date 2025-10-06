@@ -6,23 +6,6 @@ ALTER TABLE IOT_DB.DBT_HRAVAT.DIM_FRIDGE
 ADD CONSTRAINT pk_dim_fridge PRIMARY KEY (DIM_FRIDGE_SR_KEY);
 
 
-create or replace table FACT_FRIDGE (
-    FACT_FRIDGE_SR_KEY   number          primary key,
-    DATE_SR_KEY          number          not null,
-    TIME_SR_KEY          number          not null,
-    DIM_FRIDGE_SR_KEY    number(19,0)          not null,
-    MAX_FRIDGE_TEMPERATURE float,
-    MIN_FRIDGE_TEMPERATURE float,
-    AVG_FRIDGE_TEMPERATURE float,
-    INSERT_TIME          timestamp_ntz   default current_timestamp,
-    UPDATE_TIME          timestamp_ntz   default current_timestamp,
-  constraint fk_fridge_date foreign key (DATE_SR_KEY) references DIM_DATE(DATE_SR_KEY),
-  constraint fk_fridge_time foreign key (TIME_SR_KEY) references DIM_TIME(TIME_SR_KEY),
-  constraint fk_fridge_dim  foreign key (DIM_FRIDGE_SR_KEY) references DIM_FRIDGE(DIM_FRIDGE_SR_KEY)
-);
-
-
-
 CREATE OR REPLACE TABLE DIM_DATE (
   DATE_SR_KEY   number primary key,
   FULL_DATE     DATE,
@@ -49,6 +32,85 @@ CREATE OR REPLACE TABLE DIM_TIME (
   HOUR_OF_DAY  NUMBER(2,0)
 );
 
+create or replace table DIM_FRIDGE (
+  DIM_FRIDGE_SR_KEY number identity(1,1) primary key,
+  LABEL            varchar,
+  TEMP_CONDITION   varchar,
+  TYPE             varchar,
+  INSERT_TIME TIMESTAMP,
+  UPDATE_TIME TIMESTAMP
+  
+);
 
-select * 
-from DIM_TIME 
+
+create or replace table DIM_GARAGE_DOOR (
+  DIM_GARAGE_DOOR_SR_KEY number identity(1,1) primary key,
+  DOOR_STATE    varchar,
+  LABEL         varchar,
+  SPHONE_SIGNAL varchar,
+  TYPE          varchar,
+  INSERT_TIME TIMESTAMP,
+  UPDATE_TIME TIMESTAMP
+);
+
+CREATE OR REPLACE TABLE DIM_GPS_TRACKER (
+  DIM_GPS_TRACKER_SR_KEY NUMBER IDENTITY(1,1) PRIMARY KEY,
+  LABEL       VARCHAR,
+  TYPE        VARCHAR,
+  INSERT_TIME TIMESTAMP,
+  UPDATE_TIME TIMESTAMP
+);
+
+
+
+CREATE OR REPLACE TABLE DIM_MODBUS (
+  DIM_MODBUS_SR_KEY NUMBER IDENTITY(1,1) PRIMARY KEY,
+  LABEL                     VARCHAR,
+  TYPE                      VARCHAR,
+  INSERT_TIME TIMESTAMP,
+  UPDATE_TIME TIMESTAMP
+);
+
+
+CREATE OR REPLACE TABLE DIM_MOTION_LIGHT (
+  DIM_MOTION_LIGHT_SR_KEY NUMBER IDENTITY(1,1) PRIMARY KEY,
+  LABEL         VARCHAR,
+  TYPE          VARCHAR,
+  INSERT_TIME TIMESTAMP,
+  UPDATE_TIME TIMESTAMP
+);
+
+
+CREATE OR REPLACE TABLE DIM_THERMOSTAT (
+  DIM_THERMOSTAT_SR_KEY NUMBER IDENTITY(1,1) PRIMARY KEY,
+  THERMOSTAT_STATUS   VARCHAR,
+  LABEL               VARCHAR,
+  TYPE                VARCHAR,
+  INSERT_TIME TIMESTAMP,
+  UPDATE_TIME TIMESTAMP
+);
+
+CREATE OR REPLACE TABLE DIM_WEATHER (
+  DIM_WEATHER_SR_KEY NUMBER IDENTITY(1,1) PRIMARY KEY,
+  LABEL        VARCHAR,
+  TYPE         VARCHAR,
+  INSERT_TIME TIMESTAMP,
+  UPDATE_TIME TIMESTAMP
+);
+
+
+
+create or replace table FACT_FRIDGE (
+    FACT_FRIDGE_SR_KEY   number          primary key,
+    DATE_SR_KEY          number          not null,
+    TIME_SR_KEY          number          not null,
+    DIM_FRIDGE_SR_KEY    number(19,0)          not null,
+    MAX_FRIDGE_TEMPERATURE float,
+    MIN_FRIDGE_TEMPERATURE float,
+    AVG_FRIDGE_TEMPERATURE float,
+    INSERT_TIME          timestamp_ntz   default current_timestamp,
+    UPDATE_TIME          timestamp_ntz   default current_timestamp,
+  constraint fk_fridge_date foreign key (DATE_SR_KEY) references DIM_DATE(DATE_SR_KEY),
+  constraint fk_fridge_time foreign key (TIME_SR_KEY) references DIM_TIME(TIME_SR_KEY),
+  constraint fk_fridge_dim  foreign key (DIM_FRIDGE_SR_KEY) references DIM_FRIDGE(DIM_FRIDGE_SR_KEY)
+);

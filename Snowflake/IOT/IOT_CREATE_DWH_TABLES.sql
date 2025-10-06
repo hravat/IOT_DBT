@@ -39,6 +39,65 @@ create or replace table DIM_FRIDGE (
   
 );
 
+
+create or replace table DIM_GARAGE_DOOR (
+  DIM_GARAGE_DOOR_SR_KEY number identity(1,1) primary key,
+  DOOR_STATE    varchar,
+  LABEL         varchar,
+  SPHONE_SIGNAL varchar,
+  TYPE          varchar,
+  INSERT_TIME TIMESTAMP,
+  UPDATE_TIME TIMESTAMP
+);
+
+CREATE OR REPLACE TABLE DIM_GPS_TRACKER (
+  DIM_GPS_TRACKER_SR_KEY NUMBER IDENTITY(1,1) PRIMARY KEY,
+  LABEL       VARCHAR,
+  TYPE        VARCHAR,
+  INSERT_TIME TIMESTAMP,
+  UPDATE_TIME TIMESTAMP
+);
+
+
+
+CREATE OR REPLACE TABLE DIM_MODBUS (
+  DIM_MODBUS_SR_KEY NUMBER IDENTITY(1,1) PRIMARY KEY,
+  LABEL                     VARCHAR,
+  TYPE                      VARCHAR,
+  INSERT_TIME TIMESTAMP,
+  UPDATE_TIME TIMESTAMP
+);
+
+
+CREATE OR REPLACE TABLE DIM_MOTION_LIGHT (
+  DIM_MOTION_LIGHT_SR_KEY NUMBER IDENTITY(1,1) PRIMARY KEY,
+  LABEL         VARCHAR,
+  TYPE          VARCHAR,
+  INSERT_TIME TIMESTAMP,
+  UPDATE_TIME TIMESTAMP
+);
+
+
+CREATE OR REPLACE TABLE DIM_THERMOSTAT (
+  DIM_THERMOSTAT_SR_KEY NUMBER IDENTITY(1,1) PRIMARY KEY,
+  THERMOSTAT_STATUS   VARCHAR,
+  LABEL               VARCHAR,
+  TYPE                VARCHAR,
+  INSERT_TIME TIMESTAMP,
+  UPDATE_TIME TIMESTAMP
+);
+
+CREATE OR REPLACE TABLE DIM_WEATHER (
+  DIM_WEATHER_SR_KEY NUMBER IDENTITY(1,1) PRIMARY KEY,
+  LABEL        VARCHAR,
+  TYPE         VARCHAR,
+  INSERT_TIME TIMESTAMP,
+  UPDATE_TIME TIMESTAMP
+);
+
+
+
+
 create or replace table FACT_FRIDGE (
     FACT_FRIDGE_SR_KEY   number          primary key,
     DATE_SR_KEY          number          not null,
@@ -54,15 +113,7 @@ create or replace table FACT_FRIDGE (
   constraint fk_fridge_dim  foreign key (DIM_FRIDGE_SR_KEY) references DIM_FRIDGE(DIM_FRIDGE_SR_KEY)
 );
 
-create or replace table DIM_GARAGE_DOOR (
-  DIM_GARAGE_DOOR_SR_KEY number identity(1,1) primary key,
-  DOOR_STATE    varchar,
-  LABEL         varchar,
-  SPHONE_SIGNAL varchar,
-  TYPE          varchar,
-  INSERT_TIME TIMESTAMP,
-  UPDATE_TIME TIMESTAMP
-);
+
 
 create or replace table FACT_GARAGE_DOOR (
   FACT_GARAGE_DOOR_SR_KEY number identity(1,1) primary key,
