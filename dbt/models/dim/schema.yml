@@ -30,3 +30,141 @@ models:
         description: "Signal strength reported by the sensor"
       - name: type
         description: "Device type or classification"
+
+version: 2
+
+models:
+  - name: DIM_GPS_TRACKER
+    description: "Dimension table for GPS tracker IoT metadata"
+    columns:
+      - name: dim_gps_tracker_sr_key
+        description: "Surrogate key for DIM_GPS_TRACKER"
+        tests:
+          - unique
+          - not_null
+      - name: label
+        description: "Device label or identifier"
+        tests:
+          - dbt_expectations.expect_column_values_to_not_be_null
+      - name: type
+        description: "Device type or classification"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_in_set:
+              value_set: ['gps_tracker', 'vehicle_tracker', 'asset_tracker']
+      - name: insert_time
+        description: "Timestamp when record was inserted"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_recent:
+              datepart: day
+              interval: 7
+      - name: update_time
+        description: "Timestamp when record was last updated"
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+
+  - name: DIM_MODBUS
+    description: "Dimension table for Modbus IoT metadata"
+    columns:
+      - name: dim_modbus_sr_key
+        description: "Surrogate key for DIM_MODBUS"
+        tests:
+          - unique
+          - not_null
+      - name: label
+        description: "Device label or identifier"
+        tests:
+          - dbt_expectations.expect_column_values_to_not_be_null
+      - name: type
+        description: "Device type or classification"
+        tests:
+          - dbt_expectations.expect_column_values_to_match_regex:
+              regex: "^[A-Za-z0-9_]+$"
+      - name: insert_time
+        description: "Timestamp when record was inserted"
+      - name: update_time
+        description: "Timestamp when record was last updated"
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+
+  - name: DIM_MOTION_LIGHT
+    description: "Dimension table for motion and light sensor IoT metadata"
+    columns:
+      - name: dim_motion_light_sr_key
+        description: "Surrogate key for DIM_MOTION_LIGHT"
+        tests:
+          - unique
+          - not_null
+      - name: label
+        description: "Device label or identifier"
+        tests:
+          - dbt_expectations.expect_column_values_to_not_be_null
+      - name: type
+        description: "Device type or classification"
+        tests:
+          - dbt_expectations.expect_column_distinct_count_to_be_between:
+              min_value: 1
+      - name: insert_time
+        description: "Timestamp when record was inserted"
+      - name: update_time
+        description: "Timestamp when record was last updated"
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+
+  - name: DIM_THERMOSTAT
+    description: "Dimension table for thermostat IoT metadata"
+    columns:
+      - name: dim_thermostat_sr_key
+        description: "Surrogate key for DIM_THERMOSTAT"
+        tests:
+          - unique
+          - not_null
+      - name: thermostat_status
+        description: "Current status of thermostat such as active or idle"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_in_set:
+              value_set: ['active', 'idle', 'off']
+      - name: label
+        description: "Device label or identifier"
+        tests:
+          - dbt_expectations.expect_column_values_to_not_be_null
+      - name: type
+        description: "Device type or classification"
+      - name: insert_time
+        description: "Timestamp when record was inserted"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_recent:
+              datepart: day
+              interval: 3
+      - name: update_time
+        description: "Timestamp when record was last updated"
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
+
+  - name: DIM_WEATHER
+    description: "Dimension table for weather IoT metadata"
+    columns:
+      - name: dim_weather_sr_key
+        description: "Surrogate key for DIM_WEATHER"
+        tests:
+          - unique
+          - not_null
+      - name: label
+        description: "Device label or identifier"
+        tests:
+          - dbt_expectations.expect_column_values_to_not_be_null
+      - name: type
+        description: "Device type or classification"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_in_set:
+              value_set: ['weather_station', 'temperature_sensor', 'humidity_sensor']
+      - name: insert_time
+        description: "Timestamp when record was inserted"
+      - name: update_time
+        description: "Timestamp when record was last updated"
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 1
