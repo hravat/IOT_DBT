@@ -1,15 +1,30 @@
-# ~/.dbt/profiles.yml
+# profiles.yml
 
+default:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      role: "{{ env_var('SNOWFLAKE_ROLE', 'TRANSFORMER') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE') }}"
+      database: "{{ env_var('SNOWFLAKE_DATABASE') }}"
+      schema: "dbt_dev"
+      threads: 4
+
+# Your existing profile
 snowflake_dbt_profile:
   target: dev
   outputs:
     dev:
       type: snowflake
-      account: "fake_account"
-      user: "fake_user" 
-      password: "fake_password"
-      role: "fake_role"
-      warehouse: "fake_warehouse"
-      database: "fake_database"
-      schema: "fake_schema"
-      threads: 1
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      role: "{{ env_var('SNOWFLAKE_ROLE', 'TRANSFORMER') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE') }}"
+      database: "{{ env_var('SNOWFLAKE_DATABASE') }}"
+      schema: "dbt_dev"
+      threads: 4
