@@ -38,6 +38,6 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git add dbt_packages/
+          git add dbt/dbt_packages/
           git commit -m "Auto-update dbt packages"
           git push origin main || echo "No changes to commit"
