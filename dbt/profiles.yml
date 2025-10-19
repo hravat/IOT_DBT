@@ -5,26 +5,26 @@ default:
   outputs:
     dev:
       type: snowflake
-      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
-      user: "{{ env_var('SNOWFLAKE_USER') }}"
-      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
-      role: "{{ env_var('SNOWFLAKE_ROLE', 'TRANSFORMER') }}"
-      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE') }}"
-      database: "{{ env_var('SNOWFLAKE_DATABASE') }}"
-      schema: "dbt_dev"
+      account: "ab12345.ap-southeast-2"        # your Snowflake account locator
+      user: "HUSSAIN"                          # your Snowflake username
+      password: "<YOUR_PASSWORD>"               # your password or a temporary token
+      role: "ACCOUNTADMIN"                      # or TRANSFORMER, if that’s your dbt role
+      warehouse: "COMPUTE_WH"                   # your virtual warehouse
+      database: "IOT_DB"                        # your target database
+      schema: "DBT_DEV"                         # your schema for models
       threads: 4
 
-# Your existing profile
+# optional second profile (same connection details)
 snowflake_dbt_profile:
   target: dev
   outputs:
     dev:
       type: snowflake
-      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
-      user: "{{ env_var('SNOWFLAKE_USER') }}"
-      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
-      role: "{{ env_var('SNOWFLAKE_ROLE', 'TRANSFORMER') }}"
-      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE') }}"
-      database: "{{ env_var('SNOWFLAKE_DATABASE') }}"
-      schema: "dbt_dev"
+      account: "ab12345.ap-southeast-2"
+      user: "HUSSAIN"
+      password: "<YOUR_PASSWORD>"
+      role: "ACCOUNTADMIN"
+      warehouse: "COMPUTE_WH"
+      database: "IOT_DB"
+      schema: "DBT_DEV"
       threads: 4
