@@ -30,7 +30,7 @@ jobs:
         run: pip install dbt-core
 
       - name: Install dependencies from packages.yml
-        run: dbt deps --project-dir IOT_DBT/dbt
+        run: dbt deps --project-dir dbt
 
       - name: Commit and push dbt_packages folder
         env:
