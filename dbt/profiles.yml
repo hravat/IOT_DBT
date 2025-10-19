@@ -1,0 +1,15 @@
+# ~/.dbt/profiles.yml
+
+snowflake_dbt_profile:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "fake_account"
+      user: "fake_user" 
+      password: "fake_password"
+      role: "fake_role"
+      warehouse: "fake_warehouse"
+      database: "fake_database"
+      schema: "fake_schema"
+      threads: 1
