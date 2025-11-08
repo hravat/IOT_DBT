@@ -1,0 +1,51 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:14
+    container_name: marquez-postgres
+    environment:
+      POSTGRES_USER: marquez
+      POSTGRES_PASSWORD: marquez
+      POSTGRES_DB: marquez
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - marquez-network
+
+  api:
+    image: marquezproject/marquez:latest
+    container_name: marquez-api
+    depends_on:
+      - postgres
+    environment:
+      MARQUEZ_PORT: 5000
+      POSTGRES_HOST: postgres
+    ports:
+      - "5000:5000"
+    networks:
+      - marquez-network
+
+  web:
+    image: marquezproject/marquez-web:latest
+    container_name: marquez-web
+    depends_on:
+      - api
+    environment:
+      MARQUEZ_HOST: api
+      MARQUEZ_PORT: 5000
+      WEB_PORT: 3000
+      API_BASE_URL: http://api:5000
+    ports:
+      - "3000:3000"
+    networks:
+      - marquez-network
+
+volumes:
+  postgres_data:
+
+networks:
+  marquez-network:
+    driver: bridge
