@@ -46,11 +46,13 @@ services:
 
   dbt:
     build:
-      context: .
-      dockerfile: Dockerfile.dbt
+      context: ../dbt                     # 👈 give Docker access to the dbt project
+      dockerfile: ../Marquez/Dockerfile.dbt  # 👈 tell it where the Dockerfile lives
     container_name: dbt
     environment:
       DBT_PROFILES_DIR: /root/.dbt
+      OPENLINEAGE_URL: http://api:5000
+      OPENLINEAGE_NAMESPACE: dbt_snowflake
     volumes:
       - ../dbt:/usr/app
       - ../dbt/profiles.yml:/root/.dbt/profiles.yml

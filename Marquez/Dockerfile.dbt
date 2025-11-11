@@ -1,12 +1,16 @@
 FROM ghcr.io/dbt-labs/dbt-core:1.10.13
 
-# Install the Snowflake adapter
-RUN pip install dbt-snowflake
+# Install Snowflake adapter
+RUN pip install dbt-snowflake openlineage-dbt
 
-# Working directory inside the container
+# Set working directory inside container
 WORKDIR /usr/app
 
-# Do NOT copy packages.yml (it lives outside the context)
-# You will mount the dbt project folder at runtime
+# Copy the entire dbt project (so packages.yml is visible during build)
+COPY . /usr/app
 
+# Install dbt packages during build
+RUN dbt deps
+
+# Default entrypoint
 ENTRYPOINT ["dbt"]
