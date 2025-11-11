@@ -43,6 +43,25 @@ services:
     networks:
       - marquez-network
 
+
+  dbt:
+    build:
+      context: .
+      dockerfile: Dockerfile.dbt
+    container_name: dbt
+    environment:
+      DBT_PROFILES_DIR: /root/.dbt
+    volumes:
+      - ../dbt:/usr/app
+      - ../dbt/profiles.yml:/root/.dbt/profiles.yml
+      - /home/hussain/.ssh:/root/.ssh
+    working_dir: /usr/app
+    entrypoint: ["dbt"]
+    networks:
+      - marquez-network
+
+
+
 volumes:
   postgres_data:
 

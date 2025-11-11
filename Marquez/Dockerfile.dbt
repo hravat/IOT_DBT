@@ -1,0 +1,12 @@
+FROM ghcr.io/dbt-labs/dbt-core:1.10.13
+
+# Install the Snowflake adapter
+RUN pip install dbt-snowflake
+
+# Working directory inside the container
+WORKDIR /usr/app
+
+# Do NOT copy packages.yml (it lives outside the context)
+# You will mount the dbt project folder at runtime
+
+ENTRYPOINT ["dbt"]
