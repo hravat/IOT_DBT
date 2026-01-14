@@ -30,7 +30,7 @@ Include in `packages.yml`
 ```yaml
 packages:
     - package: metaplane/dbt_expectations
-      version: 0.10.8 # Check https://github.com/metaplane/dbt-expectations/releases for the latest release
+      version: 0.10.9 # Check https://github.com/metaplane/dbt-expectations/releases for the latest release
 ```
 
 This package supports:
@@ -711,7 +711,7 @@ Expect the column entries to be strings that match any of a list of SQL `like` p
 tests:
   - dbt_expectations.expect_column_values_to_match_like_pattern_list:
       like_pattern_list: ["%@%", "%&%"]
-      match_on: any # (Optional. Default is 'any', which applies an 'OR' for each pattern. If 'all', it applies an 'AND' for each regex.)
+      match_on: any # (Optional. Default is 'any', which applies an 'OR' for each pattern. If 'all', it applies an 'AND' for each like pattern.)
       row_condition: "id is not null" # (Optional)
 ```
 
