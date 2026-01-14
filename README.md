@@ -1,15 +1,24 @@
-Welcome to your new dbt project!
+# IOT_DBT
 
-### Using the starter project
+![dbt](https://img.shields.io/badge/dbt-orange?style=for-the-badge&logo=dbt&logoColor=white)
+![IoT](https://img.shields.io/badge/IoT-Data--Engineering-blue?style=for-the-badge)
 
-Try running the following commands:
-- dbt run
-- dbt test
+A specialized **dbt (Data Build Tool)** project built to transform, clean, and model Internet of Things (IoT) data. This repository contains the transformation logic required to turn high-volume, raw telemetry data into actionable insights for analytics and monitoring.
 
+---
 
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [dbt community](https://getdbt.com/community) to learn from other analytics engineers
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+## 🚀 Overview
+
+Processing IoT data presents unique challenges like high-frequency timestamps, missing sensor readings, and nested JSON payloads. **IOT_DBT** addresses these by providing a structured pipeline for:
+
+---
+
+## 🛠 Tech Stack
+
+* **dbt-core**: The backbone for data transformation.
+* **Snowflake**: Cloud Data Ware house for storage
+* **Azure**: Blob Storage ADF and Azure Synapse.
+* **Version Control**: GitHub for CI/CD integration.
+* **MArquez**: To capture data lineage
+---
+
